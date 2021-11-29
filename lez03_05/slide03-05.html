@@ -176,7 +176,7 @@ void setint(int* ip, int i)
 </script></section><section  data-markdown><script type="text/template">
 ### Introduzione light a funzioni, puntatori e GDB
 ```sh
-$ ulimit -n unlimited</code>
+$ ulimit -n unlimited
 valore a: 32764
 Segmentation fault (core dumped)
 ```
@@ -334,20 +334,48 @@ Program terminated with signal SIGSEGV, Segmentation fault.
 (gdb)
 ```
 </script></section><section  data-markdown><script type="text/template">
-### Mandiamo in *crash* il vostro PC
+### Ancora un occhio a *struct* e *puntatori*
 
-```c
+```c[]
+
 #include <stdio.h>
-#include <sys/types.h>
- 
-int main()
-{
-    while(1)
-       fork();   
-    return 0;
+#include <string.h>
+
+struct Persona {
+  char nome[50];
+  int id;
+  float salario;
+} persona1;
+
+struct Persona *copia;
+
+int main() {
+
+  strcpy(persona1.nome, "Mario Rossi");
+
+  persona1.id = 1;
+  persona1.salario = 2500;
+
+  // print struct variables
+  printf("Nome: %s\n", persona1.nome);
+// printf("Nomecon->: %s\n", persona1 -> nome);
+// error: invalid type argument of ‘->’ (have ‘struct Persona’)
+  printf("ID No.: %d\n", persona1.id);
+  printf("Salario: %.2f", persona1.salario);
+
+  copia = &persona1;
+
+//printf("\nNomeCopia: %s\n", *copia.nome);
+//error: ‘copia’ is a pointer; did you mean to use ‘->’?
+//-> è uno shortcut per (*x).field
+
+printf("\nNomeCopia: %s\n", copia -> nome);
+printf("\nNomeCopia: %s\n", (*copia).nome);
+  return 0;
+
 }
-```
-</script></section><section  data-markdown><script type="text/template">
+
+```</script></section><section  data-markdown><script type="text/template">
 # ESERCIZI
 </script></section><section  data-markdown><script type="text/template">
 ## Materiale sempre disponibile su
@@ -512,18 +540,12 @@ l’ordinamento si ottiene con meno di N-1
 passate, per non fare passate inutili si fa 
 terminare il ciclo se non ci sono stati scambi **scambio = true**
 </script></section><section  data-markdown><script type="text/template">
+### srand(x)
 
-<code>
-/*
-	
-srand(x) è utilizzato per impostare il valore iniziale (seed) per generare una sequenza di valori interi pseudo-casuali tramite la rand() % 100 (range tra 0 e 99). Un valore seed di 1 è l'impostazione predefinita che produce la stessa sequenza di valori come se srand(x) non fosse utilizzato. Qualsiasi altro valore per il seed fornisce una sequenza diversa.
-	
- 
-	
-*/
-
-</code>
-</script></section><section  data-markdown><script type="text/template">
+- si usa per generare una sequenza di valori interi pseudo-casuali tramite la <code>rand() % 100</code> (range tra 0 e 99)
+- <code>srand(x)</code> è utilizzato per impostare il valore iniziale (seed). 
+- Un valore seed di 1 è l'impostazione predefinita che produce la stessa sequenza di valori come se srand(x) non fosse utilizzato. - Qualsiasi altro valore per il seed fornisce una sequenza diversa.
+	</script></section><section  data-markdown><script type="text/template">
 ### Esercizio svolto 10
 
 ```c[4|1-66]
@@ -749,29 +771,6 @@ void PARI(int VET[MAX], int n, int *startmax, int *lmax) {
     printf("Nessuna sequenza di numeri pari trovata!\n");
   }
 }
-struct EL {
-  int n;
-  struct EL *next;
-  struct EL *prev;
-};
-struct EL *primo = NULL, *ultimo = NULL;
-void stampa(struct EL *primo, struct EL *ultimo) {
-  printf("PRIMO -> ");
-  while (primo != NULL) {
-    printf("%d -> ", primo -> n);
-    primo = primo -> next;
-  }
-  printf("NULL\n");
-  printf("ULTIMO -> ");
-  while (ultimo != NULL) {
-    printf("%d -> ", ultimo -> n);
-    ultimo = ultimo -> prev;
-  }
-  printf("NULL\n");
-}
-
-
-
 
 int main(int argc, char *argv[]) {
 int startmax, lmax;
@@ -817,7 +816,7 @@ int VET4[MAX] = {
 //printf("ES2: La funzione main ha ritornato: %d\n", es2(argc, argv));
 //es 4
 
-printf("ES4 quarto appello 2019/2020:\n");
+printf("\n\nES4 quarto appello 2019/2020:\n\n\n");
 PARI(VET0, 0, &startmax, &lmax);
 printf("inizio = %d, lunghezza = %d.\n\n", startmax, lmax);
 PARI(VET1, 4, &startmax, &lmax);
@@ -842,6 +841,21 @@ return 0;
 
 ![es-es2-2app-1718-sol.png](es-es2-2app-1718-sol.png)
 </script></section><section  data-markdown><script type="text/template">
+### Buona cena, mandiamo in *crash* il vostro PC
+
+```c
+#include <stdio.h>
+#include <sys/types.h>
+ 
+int main()
+{
+    while(1)
+       fork();   
+    return 0;
+}
+```
+</script></section><section  data-markdown><script type="text/template">
+
 <p class="fragment fade-in-then-out">The END</p>
 </script></section><section  data-markdown><script type="text/template">
 
