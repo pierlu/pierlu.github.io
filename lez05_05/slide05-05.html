@@ -1308,7 +1308,7 @@ struct el * inscoda(struct el * lista, int val) {
 }
 
 ```</script></section><section  data-markdown><script type="text/template">
-### exploit code
+### exploit code (*buffer overflow*)
  
 - non funziona con i linux moderni
 
@@ -1329,6 +1329,28 @@ printf("[AFTER] buffer_two is at %p and contains \'%s\'\n", buffer_two, buffer_t
 printf("[AFTER] buffer_one is at %p and contains \'%s\'\n", buffer_one, buffer_one);
 printf("[AFTER] value is at %p and is %d (0x%08x)\n", &value, value, value);
 ```</script></section><section  data-markdown><script type="text/template">
+### caso "storico": format string non controllata
+
+- vulnerabilità molto presente prima del 2010
+- succede nello scrivere printf(buffer) invece di printf("%s", buffer)
+- La prima versione analizza eventuali istruzioni di formattazione inserite in input 
+- La seconda versione stampa semplicemente una stringa sullo schermo
+- Entrambe le versioni si comportano in modo identico in assenza di input malevolo
+</script></section><section  data-markdown><script type="text/template">
+### ad esempio
+
+- Un utente malintenzionato può utilizzare i token  %s e %x, tra gli altri, per stampare dati dallo stack di chiamate o eventualmente da altre posizioni in memoria
+- Si possono anche scrivere dati in posizioni arbitrarie di memoria usando il token %n
+- l'obiettivo è spesso quello di manipolare l'*Instruction Pointer* (IP) di un processo, sovrascrivendo l'indirizzo di una libreria o di ritorno sullo stack con un puntatore a codice in grado di fornire il controllo (magari remoto) ad un attaccante.
+- Gcc ci avverte con il -Wall in caso di format string non controllata
+</script></section><section  data-markdown><script type="text/template">
+### Linux (e altri OS moderni) prevedono per la prevenzione dei *buffer overflow*
+
+- primo: *randomizing stack base address in virtual memory* prima di ogni esecuzione di un programma. 
+- *cat /proc/sys/kernel/randomize_va_space*
+- secondo: le virtual pages dello stack possono essere lette o scritte, ma non **eseguite**
+- i compilatori, come detto, prevedono *safeguard*
+</script></section><section  data-markdown><script type="text/template">
 ![hacking](hacking.png)
 </script></section><section  data-markdown><script type="text/template">
 ### Hacking: the art of exploitation, 2nd edition author Jon Erickson 
