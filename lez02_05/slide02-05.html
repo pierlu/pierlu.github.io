@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Laboratorio lezione</title>
+    <link rel="shortcut icon" href="./favicon.ico"/>
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/solarized.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/tomorrow-night-bright.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+## Piano delle lezioni
+
+Aula T.2.1 Trifoglio (Leonardo) e *online* (registrato)
+dalle 14.15 alle 17.15 
+
+- 30 settembre (prima lezione introduttiva)
+- <mark> 07 ottobre (C base)</mark>
+- 28 ottobre (Costruttori)
+- 25 novembre (Costruttori e funzioni)
+- 16 dicembre (Liste)
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Argomenti della lezione 2 di 5
+
+- *Warning*, FAQ da principiante in C, il linguaggio *C Base*
+- 2 esercizi svolti
+- 7 esercizi da svolgere in autonomia (durante o dopo il laboratorio)
+- 2 prove d'esame degli anni passati
+- consigliamo sempre prima su 📑 poi su 💻
+- ripetere gli esercizi su 💻 poi su 📑 
+</script></section><section  data-markdown><script type="text/template">
+L’obiettivo finale del laboratorio è quello di rendervi **AUTONOMI** nel reperimento di
+esercizi di programmazione da risolvere con il vostro PC, secondo i vostri ritmi
+</script></section><section  data-markdown><script type="text/template">
+Il linguaggio C, come tutti gli altri linguaggi comporta **tempi di apprendimento personali**
+ed ognuno può modularli secondo il proprio tempo di studio. Può aiutare la comprensione dei <mark>warning</mark> ed errori del compilatore.
+</script></section><section  data-markdown><script type="text/template">
+I compilatori C e C++ non segnalano di *default* alcuni errori comuni dei programmatori, soprattutto se alle prime armi:
+
+- inizializzazione di una variabile
+- dimenticanza nel restituire un valore da una funzione
+- argomenti nelle famiglie <code>printf</code> e <code>scanf</code> che non corrispondono alla stringa di formato
+- una funzione che viene utilizzata senza essere dichiarata in anticipo
+</script></section><section  data-markdown><script type="text/template">
+### i flag da abilitare per imparare al PC
+
+- Durante la compilazione abilitare i *flag* <code> -Wall -Wextra -Wshadow </code>
+- questo permette di imparare dai vostri errori e non ripeterli all'esame
+</script></section><section  data-markdown><script type="text/template">### Esempio
+
+```c
+int funzione(int a, int b)
+{
+   int c = 0;
+
+   if (a > 0)
+   {
+        return a;
+   }
+   return 0;
+}
+```
+
+- Senza <code>-Wall</code> compilando non vengono restituiti errori da gcc.
+- con <code>-Wall</code> -> <code>warning: unused variable ‘c’ </code>
+- con <code>-Wextra</code> -> <code>unused parameter ‘b’ </code>
+</script></section><section  data-markdown><script type="text/template">### shadow variable
+
+```c [1|5]
+int c = 7;
+
+int foo(int a, int b)
+{
+   int c = a + b;
+   return c;
+}
+```
+- senza <code> -Wall -Wextra -Wshadow </code> nessun errore
+- utilizzando <code> -Wshadow </code> viene segnalato lo *shadowing* della variabile <code>c</code>
+</script></section><section  data-markdown><script type="text/template">
+# FAQ 
+### (dallo scorso laboratorio)
+</script></section><section  data-markdown><script type="text/template">
+- quali sono i livelli di comprensione del C?
+
+	- **conoscenza** 3 mesi
+	- **cognizione, know-how** 12 mesi (ogni studente dopo i 5 anni in ingegneria, almeno)
+	- **esperienza, wisdom** da 2/3 anni in poi
+</script></section><section  data-markdown><script type="text/template">
+- quali sono i parametri di misura di un buon programmatore?
+
+	- *initial coding time*
+	- *debugging time*
+	- *program size*
+	- *program execution time*
+	- *code security*
+	- *documentation*
+</script></section><section  data-markdown><script type="text/template">
+- La capacità di programmare migliora con il tempo?
+
+dopo i due anni è difficile migliorare i parametri principali <!-- .element: class="fragment" -->
+</script></section><section  data-markdown><script type="text/template">
+Un buon programmatore con 10 o più anni di esperienza è migliore o peggiore di uno con due anni?
+
+- sono essenzialmente allineati <!-- .element: class="fragment" -->
+- ne consegue che bisogna essere "tagliati" per programmare <!-- .element: class="fragment" -->
+- è chiaro che con 10 anni o più di esperienza si conoscono tecniche, linguaggi e contesti che possono fare la differenza <!-- .element: class="fragment" -->
+</script></section><section  data-markdown><script type="text/template">
+Quali sono le performance di un buon programmatore rispetto alla media?
+
+- tutti i parametri elencati mostrano livelli di 2/1 o 3/1 <!-- .element: class="fragment" --> 
+- i parametri best/worst vanno da 10/1 a 20/1 <!-- .element: class="fragment" --> 
+</script></section><section  data-markdown><script type="text/template">
+- in quanto tempo si diventa *fluenti* in C?
+	- da 6 mesi ad un anno con un certo impegno <!-- .element: class="fragment" -->
+- <!-- .element: class="fragment" --> e se non lo diventiamo? 
+	- se siete qui è quasi impossibile :-) <!-- .element: class="fragment" -->
+- <!-- .element: class="fragment" --> la programmazione (specialmente in C) non è solo capacità di risolvere e scrivere algoritmi, ma anche di far funzionare hardware, sistemi e di spingersi a basso livello
+- c'è spazio per tutti! <!-- .element: class="fragment" -->
+
+</script></section><section  data-markdown><script type="text/template">
+# ESERCIZI
+</script></section><section  data-markdown><script type="text/template">
+## Prerequisiti e assunzioni
+
+- dopo la volta scorsa, dovreste avere il vostro ambiente di programmazione **funzionante**
+- se avete ancora problemi potete <mark>chiedere ai tutor</mark>
+</script></section><section  data-markdown><script type="text/template">
+## Materiale sempre disponibile su
+
+- https://webeep.polimi.it/mod/folder/view.php?id=110423 
+- queste <!-- .element: class="fragment" --> slide in formato interattivo si trovano su  *github*, all'indirizzo https://localhost.it/lez02_05/ 
+- gli <!-- .element: class="fragment" --> esercizi di questo laboratorio si trovano su *webeep*
+- le  <!-- .element: class="fragment" -->  soluzioni saranno disponibili su *webeep* dopodomani </script></section><section  data-markdown><script type="text/template">
+## Più spazio per voi
+
+L'enfasi del laboratorio è lasciarvi spazio per testare e lavorare sui problemi in compagnia, con l'assistenza dei *tutor* e del sottoscritto
+</script></section><section  data-markdown><script type="text/template">
+## Come procedere
+
+- Editor (puro o IDE, come CLion) 
+- Compilatore su su Windows, come scritto nella introduzione a questo laboratorio, possiamo usare <!-- .element: class="fragment" -->
+	- WSL (Windows subsystem for linux)
+	- MinGW (Minimal Gnu for Windows) 
+	- Cygwin o meglio w64devkit (scaricabile senza bisogno di installare) 
+- Compilatore su Linux (Gcc o clang, installare via apt-get o simili) <!-- .element: class="fragment" -->
+- Compilatore su macOS (xcode, lanciare da command line via gcc o clang) <!-- .element: class="fragment" -->
+</script></section><section data-markdown><script type="text/template">
+### per compilare
+
+```sh
+
+pierlu@DESKTOP-OQDO4TE:~$ clang -Wall -lm -o lez1 lez1.c
+pierlu@DESKTOP-OQDO4TE:~$ gcc -std=c99 -Wall -Wextra -Wshadow -lm -o lez1 lez1.c
+pierlu@DESKTOP-OQDO4TE:~$ C99 -Wall -o lez1 lez1.c -lm 
+ 
+
+```</script></section></section><section  data-markdown><script type="text/template">Avete scaricato il testo dei 10 esercizi da webeep?
+
+- scaricate gli esercizi di oggi e procediamo <!-- .element: class="fragment up" --> 
+- https://webeep.polimi.it/ <!-- .element: class="fragment up" -->
+</script></section><section  data-markdown><script type="text/template">
+## Esercizio svolto 1
+
+![es1](es1.png)
+</script></section><section  data-markdown><script type="text/template">
+ 
+```c[1-2|4|6|8-9|11-12|14-15|17-18|20|23-26|28-33|35|20|35|38|40-42|43|45-48|50-53|20|35|50-53|55]
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TITOLO_ES2_1 "Es2.1 - Temperatura nella media stagionale Estiva[27.5,32.5]-Invernale[2.5,7.5].\n"
+
+int main(int argc, char * argv[]) {
+
+  char stagione;
+  float temp;
+
+  //"Es2.1 - Temperatura nella media stagionale Estiva[27.5,32.5]-Invernale[2.5,7.5].\n"
+  printf(TITOLO_ES2_1);
+
+  printf("Stagione? ");
+  scanf("%c", & stagione);
+
+  printf("Temperatura? ");
+  scanf("%f", & temp);
+
+  if (stagione == 'e') {
+
+    if (temp >= 27.5 && temp <= 32.5) {
+      printf("Temperatura estiva nella media stagionale.\n");
+    } else {
+      printf("Temperatura estiva NON nella media stagionale!\n");
+    }
+
+  } else if (stagione == 'i') {
+
+    if (temp >= 2.5 && temp <= 7.5) {
+      printf("Temperatura invernale nella media stagionale.\n");
+    } else {
+      printf("Temperatura invernale NON nella media stagionale!\n");
+    }
+
+  } else {
+    printf("Stagione non valida.\n");
+  }
+
+  return 0;
+
+}
+
+```
+
+<pre><code class="fragment fade-up" data-trim ><script type="text/template">
+
+/*
+//KO
+ if(27.5 <= T <=32.5)  
+//OK
+ if (temp >= 27.5 && temp <= 32.5)
+*/
+
+ 
+
+__SCRIPT_END__</code></pre>
+</script></section><section  data-markdown><script type="text/template">
+## Esercizio svolto 2
+
+![es2](es2.png)
+</script></section><section  data-markdown><script type="text/template">
+```c[|1-2|4|6|7|9-10|12-13|15|16-17|18-20|21-22|23-26]
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TITOLO_ES2_2 "Es2.2 - VERO se num dispari o NON compreso tra 20 e 90 inclusi.\n"
+
+int main(int argc, char * argv[]) {
+    int num;
+
+	//"Es2.2 - VERO se num dispari o NON compreso tra 20 e 90 inclusi.\n"
+    printf(TITOLO_ES2_2);
+
+    printf("num? ");
+    scanf("%d", &num);
+
+    if (num % 2 != 0 || !(num >= 20 && num <= 90) )
+    //Soluzione equivalente perche' un numero dispari % 2 fornisce resto 1 e per i Teoremi di De Morgan:
+    //if (num % 2 == 1 || (num < 20 || num > 90))
+    {
+        printf("vero\n");
+    }
+    else {
+        printf("falso\n");
+    }
+
+	return 0;
+}
+
+```</script></section><section  data-markdown><script type="text/template">
+
+### Ora potete proseguire da soli
+
+- 5 min di pausa
+- non è necessario finirli tutti (farete poi da soli in caso)
+- circa mezzora prima del termine discuteremo due esercizi di prova d'esame
+- Faremo il punto su dove siete arrivati
+ </script></section><section  data-markdown><script type="text/template">
+### Test esame (2020/2021)
+
+![es3](es3.png)
+</script></section><section  data-markdown><script type="text/template">
+
+### commenti 
+
+- Verificare se codice funziona nel caso degenere con matrice di dimensione 1x1 (ammesso nel testo);  
+- nel caso N=1 in molti elaborati la soluzione andava in errore per sfondamento sulla matrice quando accedeva all’elemento XX[i+1]. Se si evita l’errore tutti i percorsi hanno lunghezza 0 e quindi diagonale (che è =1) deve perdere. 
+- Soluzione **normale**, 7pt: calcolo la lunghezza di tutti i percorsi, poi confronto orizzontali/verticali con diagonale e decido il risultato </script></section><section  data-markdown><script type="text/template">- Soluzione da **punto aggiuntivo**, 8pt: calcola lunghezza percorso diagonale e comincio confronto con gli altri che prosegue se diagonale è più corta e viceversa si ferma se diagonale incontra percorso più corto 
+- Si confronta un elemento con un successivo e quindi attenzione a non sfondare la matrice <!-- .element: class="fragment" -->
+- Ogni percorso aveva N‐1 archi e si doveva quindi calcolare la lunghezza come somma delle lunghezze dei singoli archi <!-- .element: class="fragment" -->
+- una parte degli studenti ha escluso dal calcolo tutte le stazioni intermedie e ha considerato il passaggio diretto dalla prima all’ultima <!-- .element: class="fragment" -->
+
+</script></section><section  data-markdown><script type="text/template">
+```c[]
+#include <stdio.h>
+#include <math.h> //per test
+
+#define N 4
+typedef unsigned int riga[N];
+riga M[N] = { //PER TEST: inizializzazione
+  {
+    4,
+    10,
+    5,
+    1
+  },
+  {
+    0,
+    2,
+    6,
+    0
+  },
+  {
+    7,
+    4,
+    12,
+    8
+  },
+  {
+    0,
+    7,
+    8,
+    0
+  }
+};
+double geodist(int s1, int s2) {
+  return abs(s2 - s1);
+} //SOLO PER TEST
+int main() {
+    int r, c;
+    double diag = 0.0, dist = 0.0;
+    //caso degenere
+    if (N == 1) {
+      printf("N=1. Diagonale e percorsi tutti 0. Diagonale perde.\n");
+      return 0;
+    }
+    //PER TEST: stampa la matrice
+    printf("Matrice %d x %d:\n", N, N);
+    for (r = 0; r < N; r++) {
+      for (c = 0; c < N; c++) printf("%2d ", M[r][c]);
+      printf("\n");
+    }
+    printf("Calcolo lunghezza diagonale...\n");
+    for (r = 0; r < N - 1; r++)
+      diag = diag + geodist(M[r][r], M[r + 1][r + 1]);
+    printf("Lunghezza della diagonale: %f\n", diag);
+    printf("Analisi righe...\n");
+    for (r = 0; r < N; r++) {
+      dist = 0.0;
+      for (c = 0; c < N - 1; c++)
+        dist = dist + geodist(M[r][c], M[r][c + 1]);
+      printf(" riga %d = %f\n", r, dist);
+      if (diag > dist) {
+        printf("Diagonale perde %f\n", dist);return 0;}
+        }
+        printf("Analisi colonne...\n");
+        for (c = 0; c < N; c++) {
+          dist = 0.0;
+          for (r = 0; r < N - 1; r++)
+            dist = dist + geodist(M[r][c], M[r + 1][c]);
+          printf("colonna %d = %f\n", c, dist);
+          if (diag > dist) {
+            printf("Diagonale perde %f\n", dist);
+            return -1;
+          }
+        }
+        printf("Diagonale vince!\n");
+        return 0;
+      }
+
+```
+
+</script></section><section  data-markdown><script type="text/template">
+## Domande di teoria Esercizio 4
+### Domanda 4.a
+Una volta generato l’eseguibile di un *programma.exe* scrivere le istruzioni necessarie per invocare
+tale programma da riga di comando passando come parametri i numeri 10, 20, 100 e 110.
+
+<code>
+.\programma.exe 10 20 100 110 
+</code>
+</script></section><section  data-markdown><script type="text/template">
+### Domanda 4.b
+
+Cosa significa che l’algoritmo usato per convertire un numero intero in formato binario in complemento a due converge sempre, mentre quello per la codifica della parte frazionaria di un numero float IEEE754 può non convergere?
+</script></section><section  data-markdown><script type="text/template">
+- Algoritmo per complemento a due produce i valori dei bit tramite la divisione ripetuta per 2 sino a quando arriverà a zero e ciò accadrà sempre (convergenza) .
+- Algoritmo float si basa invece sulla moltiplicazione x 2 e si ferma quando raggiuge lo zero (tolto il riporto e ciò può non accadere mai (non convergenza).
+</script></section><section  data-markdown><script type="text/template">
+### Domanda 4.c
+
+Date le seguenti definizioni: <cod>int a=3, b=-3; </code>
+l’esecuzione delle seguenti due istruzioni mostra lo stesso valore per le due variabili a e b? Motivare la risposta data
+
+<code>
+printf (“a=%u e b=%u”, a,b );
+
+printf (“a=%d e b=%d”, a,b );
+</code>
+</script></section><section  data-markdown><script type="text/template">
+Supponiamo 32 bit a disposizione.
+Noi sappiamo che le configurazioni di bit disponibili sono 2^32 ossia 4294967296.
+</script></section><section  data-markdown><script type="text/template">
+Trovo la metà 2147483647 per suddividere le configurazioni disponibili in due intervalli:
+1. intervallo1 da 0 a 2147483647 e
+2. intervallo2 da 21474836648 a 4294967295
+</script></section><section  data-markdown><script type="text/template">
+Il tipo *unsigned* dedica i due intervalli solo ai numeri positivi e quindi non vede la distinzione tra i due intervalli e determina la corrispondenza tra configurazione binaria/decimale con la regola del cambio di base.
+CP2 divide l’intervallo in due parti:
+</script></section><section  data-markdown><script type="text/template">
+dedica il **primo intervallo** (da 0 a 2147483647) ai positivi e determina la corrispondenza configurazione bit e
+numero in base 10 come il tipo unsigned. 
+
+A=+3 ricade in questo intervallo e quindi ha la stessa codifica sia che sia considerato come integer o come unsigned integer ‐> stampa 3 con %d e %u
+</script></section><section  data-markdown><script type="text/template">
+dedica il **secondo intervallo** (configurazioni da 21474836648 a 4294967295) ai numeri negativi
+associando la configurazione di
+
+
+- 21474836648 al valore -21474836648
+- 21474836649 al valore -21474836647
+- …
+- 4294967293 al valore -3
+- 4294967294 al valore -2
+- 4294967295 al valore -1
+</script></section><section  data-markdown><script type="text/template">
+
+Quindi quando scrivo 
+<code>
+int b=-3; 
+</code>
+
+nella variabile <code>b</code> troverò la combinazione binaria corrispondente alla codifica del numero 4294967293.
+</script></section><section  data-markdown><script type="text/template">
+A questo punto se stampo <code>b</code> come intero ottengo -3, ma se stampo <code>b</code> con <code>%u</code> il programma
+prende la configurazione di 4294967293 memorizzata nella variabile <code>b</code>  e la interpreta
+come se fosse un *unsigned* con intervallo unico e quindi stamperà il numero
+decimale corrispondente ossia 4294967293.
+</script></section><section  data-markdown><script type="text/template">
+### Domanda 4.d 
+
+La regola di codifica dei float FP32, IEEE754, gestisce automaticamente la distribuzione dei bit della mantissa per la codifica della parte intera e frazionaria del numero dato. 
+</script></section><section  data-markdown><script type="text/template">
+
+Considerando come esempio i numeri float 60,6 e 130,7
+codificati usando una mantissa di soli 10 bit (invece dei 23 bit standard) come si può dimostrare che l’algoritmo IEEE754 di codifica dedica più bit della mantissa per il numero 130, rispetto al numero 60, ma lasciando poi meno bit per la codifica della parte frazionaria 0,7 al contrario del numero 60,6?
+
+</script></section><section  data-markdown><script type="text/template">
+Nell’osservazione sulla codifica FP32 si è detto che la codifica della parte frazionaria nella
+mantissa avviene nel seguente modo:
+Converto parte intera, tolgo il primo (hidden) bit e metto i rimanenti nella mantissa
+Ne consegue che 130 occuperà più bit di 60, lasciando pertanto meno bit per la parte
+frazionaria.
+
+</script></section><section  data-markdown><script type="text/template">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="fragment fade-in-then-out">The END</p>
+</script></section><section  data-markdown><script type="text/template">
+
+</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"fade,","slideNumber":"c/t,"}, queryOptions);
+    </script>
+
+
+    <script> 
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
