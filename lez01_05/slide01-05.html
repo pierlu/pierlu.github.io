@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Laboratorio lezione</title>
+    <link rel="shortcut icon" href="./favicon.ico"/>
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/solarized.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/tomorrow-night-bright.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+## Argomenti della lezione 1 di 5
+
+- il linguaggio C nel panorama dei *programming languages* (perché è importante)
+- allestimento del laboratorio (info su file su *Intro Lezione 1 Laboratorio.pdf*) prossima slide
+- 2 esercizi svolti
+- 7 esercizi da svolgere in autonomia (durante o dopo il laboratorio)
+- esercizi **pari** prima su 📑 poi su 💻
+- esercizi **dispari** prima su 💻 poi su 📑 
+</script></section><section  data-markdown><script type="text/template">
+<section data-background-iframe="Intro_Lezione_1_Laboratorio.pdf" data-background-interactive></section>
+</script></section><section  data-markdown><script type="text/template">
+## In ciascuna delle prossime lezioni
+
+- dovete avere il vostro ambiente di programmazione **funzionante**
+- qualunque esso sia <!-- .element: class="fragment" -->
+- faremo esercizi (i primi svolti) <!-- .element: class="fragment" -->
+- daremo tips and tricks per lo studio <!-- .element: class="fragment" -->
+- esamineremo prove di esame <!-- .element: class="fragment highlight-red" -->
+</script></section><section  data-markdown><script type="text/template">
+# Morale
+
+### Dovete avere familiarità con la sintassi e usare il C in maniera naturale, *parlandolo* 
+<!-- .element: class="fragment" -->
+
+- Controllate il materiale dei nostri laboratori su
+- https://webeep.polimi.it/mod/folder/view.php?id=195745
+</script></section><section  data-markdown><script type="text/template">
+
+# Prerequisiti
+
+seguenti concetti:
+
+1. **Variabili**: entità che contengono valori
+2. **Condizionali**: fare qualcosa (o non fare) soggetto a una condizione precisa
+3. **Iterazione**: fare qualcosa ripetutamente per un numero specificato di volte o fino a quando non viene soddisfatta una determinata condizione
+</script></section><section  data-markdown><script type="text/template">
+## Aiuta avere letto qualcosa su
+
+> Basic, Fortran, R, bash, JavaScript, Java, MATLAB, Perl, Python, Scilab, HTML...   
+C (versione "storica"), C++, *LaTeX*
+</script></section><section  data-markdown><script type="text/template">
+### *Hitchhiker’s Guide to the Galaxy by Douglas Adams [1986]*
+
+# Don’t panic.
+</script></section><section  data-markdown><script type="text/template">
+## C nel panorama dei *programming languages*
+
+- per dare un po' di contesto ai nostri sforzi per imparare il C
+- indagine 2021 (ultima disponibile) a proposito della popolarità dei diversi linguaggi
+- https://www.jetbrains.com/lp/devecosystem-2021/
+- vediamo un sistema operativo "da manuale" scritto in C con il sorgente disponibile
+</script></section><section  data-markdown><script type="text/template">
+<section data-background-iframe="https://www.openbsd.org"
+          data-background-interactive>
+<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>WWW.OPENBSD.ORG</h2>
+						<p>Realizzato in linguaggio C, codice aperto. E' possibile analizzare e studiare il codice, un esempio di eleganza e maturità</p>
+					</div>
+ </section>
+</script></section><section  data-markdown><script type="text/template">
+### Il codice sorgente è su
+
+- https://github.com/openbsd/src
+</script></section><section  data-markdown><script type="text/template">
+# Bene, il momento di lavorare
+### Occorrente
+
+- PC con Windows 10
+- PC con Windows 11
+- PC con macOS
+- PC con Linux (preferibilmente Ubuntu 20.04 LTS)
+</script></section><section  data-markdown><script type="text/template"># Keywords
+
+- Sourcecode <!-- .element: class="fragment" -->
+- IDE ( integrated development environment ) <!-- .element: class="fragment" -->
+- Compilatore <!-- .element: class="fragment" -->
+- Eseguibile <!-- .element: class="fragment" -->
+- Libreria, linker <!-- .element: class="fragment" -->
+</script></section><section  data-markdown><script type="text/template">
+# Codice sorgente
+
+- File di testo editabile con un editor che non aggiunge opzioni di *formattazione* 
+- ad esempio: **VIM**, **Notepad**, o meglio un editor in grado di offrire *Syntax Highlighting*.
+</script></section><section  data-markdown><script type="text/template">
+# Libreria
+
+
+- Nel Linguaggio C, come nella maggior parte dei linguaggi ad alto livello, esistono le librerie 
+- sono una collezione di funzioni precompilate che possono essere collegate al programma 
+- questo permette di ottimizzare lo spazio occupato da eseguibili  
+- grazie alla condivisione di porzioni di codice, <!-- .element: class="fragment" --> sia *at rest* (sul disco), che  *a runtime*  
+</script></section><section  data-markdown><script type="text/template">
+## Non è più lo stesso
+
+- Il C non è lo stesso linguaggio di quello originariamente progettato dai suoi creatori, Kernighan e Ritchie (di solito indicato come K&R C) <!-- .element: class="fragment" -->
+- Il linguaggio originario, vista l'importanza acquisita, è stato standardizzato dall'ISO, l'International Standards Organization. <!-- .element: class="fragment" -->
+- Ciò ha portato alla pubblicazione di una serie di standard C nel 1989, 1999, 2011 e 2018, comunemente indicati come C89, C99, C11 e C17. <!-- .element: class="fragment" -->
+</script></section><section  data-markdown><script type="text/template">
+### ISO si impegna a garantire compatibilità con le versioni precedenti 
+
+ il codice scritto per le versioni precedenti del linguaggio, ad esempio C89, può essere compilato da un compilatore che implementa una versione più recente <!-- .element: class="fragment" -->
+
+ noi utilizzeremo C99 e C89 (ANSI C), potremmo imbatterci in C11 o C17. <!-- .element: class="fragment" -->  
+
+
+ Il nuovo? probabilmente C23 <!-- .element: class="fragment fade-up" style="color:red" -->  
+
+</script></section><section  data-markdown><script type="text/template">
+# C != C++
+
+- Non è proprio vero che il C++ si sia evoluto dal C aggiungendo le sue caratteristiche particolari. 
+- il C++ si è evoluto da un C molto antico <!-- .element: class="fragment" -->
+- C e C++ si sono separati più di 30 anni fa e da allora si sono evoluti separatamente <!-- .element: class="fragment fade-in-then-out" -->
+- C e C++ sono diversi: non confondeteli <!-- .element: class="fragment highlight-red" -->  
+</script></section><section  data-markdown><script type="text/template">
+## Come procedere
+
+- Editor (eventualmente nella forma di un IDE, come CLion) 
+- Compilatore su su Windows, come scritto nella introduzione a questo laboratorio, possiamo usare <!-- .element: class="fragment" -->
+	- WSL (Windows subsystem for linux)
+	- MinGW (Minimal Gnu for Windows)
+	- Cygwin 
+- Compilatore su Linux (Gcc o clang, installare via apt-get o simili) <!-- .element: class="fragment" -->
+- Compilatore su macOS (xcode, lanciare da command line via gcc o clang) <!-- .element: class="fragment" -->
+</script></section><section  data-markdown><script type="text/template">
+## WSL
+
+- lo consigliamo perché fornisce un ambiente standard linux su windows.
+- accertatevi di averlo funzionante (chiedete aiuto)
+- non è detto che tutti i PC lo supportino <!-- .element: class="fragment" -->
+</script></section><section  data-markdown><script type="text/template">
+## Una distribuzione di MinGW che non si installa
+
+- E' possibile scaricare una versione minimale di MinGW su Windows che si lancia dal folder scaricato
+- Download da https://github.com/skeeto/w64devkit/releases/download/v1.10.0/w64devkit-mini-1.10.0.zip
+- compileremo un videgioco arcade (sì, a gettoni!) con MinGW
+</script></section><section  data-markdown><script type="text/template">
+<!-- blank line -->
+<figure class="video_container">
+  <video controls="true" autoplay="true" muted="true" allowfullscreen="true">
+    <source src="https://nullprogram.s3.amazonaws.com/asteroids/asteroids.mp4" type="video/mp4">
+  </video>
+</figure>
+<!-- blank line -->
+
+</script></section><section  data-markdown><script type="text/template">
+### Primo esempio
+
+
+```c [|4-11|13-18]
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(void) {
+// Dichiarazioni
+double A[5] = {
+[1] = 1.7,
+[3] = .00006,
+[4] = 3.E+24,
+[0] = 8.0,
+};
+
+// Ciclo for
+for (size_t i = 0; i < 5; ++i) {
+printf("val elemento %zu: %g\t quadrato: %g\n", i,
+A[i],
+A[i]*A[i]);
+ }
+
+return EXIT_SUCCESS;
+}
+
+```
+
+<aside class="notes"><p>manca la variabile i!</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+### per compilare
+
+```sh
+
+pierlu@DESKTOP-OQDO4TE:~$ clang -Wall -lm -o lez1 lez1.c
+pierlu@DESKTOP-OQDO4TE:~$ gcc -std=c99 -Wall -lm -o lez1 lez1.c
+pierlu@DESKTOP-OQDO4TE:~$ C99 -Wall -o lez1 lez1.c -lm 
+ 
+
+```
+</script></section><section  data-markdown><script type="text/template">
+## con errori
+
+ 
+```c[|2|13|19]
+
+void main() {
+// Dichiarazioni
+double A[5] = {
+ 1.7,
+ .00006,
+ 3.E+24,
+ 8.0,
+};
+
+// Ciclo for
+for (size_t i = 0; i < 5; ++i) {
+printf("val elemento %zu: %g\t quadrato: %g\n",
+i,
+A[i],
+A[i]*A[i]);
+ }
+
+return 0;
+}
+
+```
+
+<pre><code class="fragment fade-up" data-trim ><script type="text/template">
+
+#include <stdlib.h>
+#include <stdio.h>
+
+__SCRIPT_END__</code></pre>
+</script></section><section  data-markdown><script type="text/template">
+C è progettato in maniera **imperativa** (istruzioni al computer)  
+
+C deve essere **compilato** per essere eseguito.  
+<!-- .element: class="fragment" -->
+Un programma C può essere utilizzato su **architetture** di computer differenti  
+<!-- .element: class="fragment" -->
+(ma dipende dal livello hardware che vogliamo programmare)  
+<!-- .element: class="fragment" -->
+Il compilatore C esibisce dei **warning** eventualmente durante la compilazione  
+<!-- .element: class="fragment" -->
+
+</script></section><section  data-markdown><script type="text/template">
+## Esercizio svolto: Esercizio 1_1
+
+Scrivere un programma che stampi a video il seguente messaggio su due righe:
+
+> Hello World! 
+     
+> Ciao Mondo!  
+
+
+All’inizio del programma inserire un commento che contenga il nome dell'autore e la data di creazione del codice.
+</script></section><section  data-markdown><script type="text/template">
+## Suggerimento 1:  
+
+- La `int main()` è la speciale funzione che indica dove inizia l'esecuzione del programma e deve restituire un numero intero. 
+- Occorre quindi ricordarsi di utilizzare return per restituire il numero 0 che per convenzione indica che non si sono verificati errori.  
+- La funzione per stampare sullo standard output (cioè a video) è `printf` e per utilizzarla occorre includere la libreria di standard input/output con la direttiva al preprocessore `#include <stdio.h>` 
+- per andare a capo nella stampa tramite printf si utilizza la "escape sequence" `\n`
+</script></section><section  data-markdown><script type="text/template">
+
+## Suggerimento 2: 
+
+- per andare a capo nella stampa tramite printf si utilizza la "escape sequence" `\n`
+
+- I commenti su una riga iniziano con `//` o `/*`
+
+
+```js
+// Commento su una riga
+
+/* Commento   
+   Multiriga */
+```
+</script></section><section  data-markdown><script type="text/template">
+## Soluzione es. 1_1
+
+```c
+
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
+#define TITOLO_ES1_1 "Es1.1 - Stampa di un messaggio.\n"
+
+int main(void) {
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>	
+	/* 
+		[Commento multiriga]
+		Ottobre 2021
+		By Paolo & Pierluigi
+	*/
+	
+	// [Commento su una sola riga] Primo esercizio
+	
+	//Es1.1 - Stampa di un messaggio
+	printf(TITOLO_ES1_1);
+	
+	printf("Hello World!\nCiao Mondo!\n");
+	
+	return 0;	
+}
+
+```</script></section><section ><section data-markdown><script type="text/template">
+## Esercizio 1_2
+
+Scrivere un programma che dichiari tre variabili intere
+`a, b, somma`
+e chieda all'utente di inserire i valori di `a` e `b` (indifferentemente in base 10 o base 8 o base 16). 
+</script></section><section data-markdown><script type="text/template">Esempio in base 10 in cui l'utente utilizza le cifre 0-9:
+`a? 2 ` 
+
+`b? 8`</script></section><section data-markdown><script type="text/template">Esempio in base 8 in cui l'utente antepone il prefisso zero 0 al numero e utilizza le cifre 0-7:
+
+`a? 02`
+
+`b? 010`</script></section><section data-markdown><script type="text/template">Esempio in base 16 in cui l'utente antepone il prefisso 0x al numero e utilizza le cifre 0-9 e A-F:
+
+`a? 0x2`
+
+`b? 0x8`
+</script></section><section data-markdown><script type="text/template">
+Il programma deve assegnare alla variabile `somma` il risultato di `a + b` e stampare a video i valori delle 3 variabili (`a, b, somma`) in base 10, base 8 e base 16 con il seguente messaggio:
+
+> Base10: a + b = 2 + 8 = 10
+>
+> Base8 : a + b = 2 + 10 = 12
+>
+> Base16: a + b = 2 + 8 = a
+</script></section><section data-markdown><script type="text/template">
+## Suggerimento 1
+
+- la funzione per richiedere i valori delle variabili all'utente tramite standard input (cioè la tastiera) è `scanf`.
+
+- Occorre ricordare di anteporre il simbolo `&` alla variabile che riceve il valore, ad esempio:
+`scanf("%d", &a);`
+</script></section><section data-markdown><script type="text/template">
+## Suggerimento 2
+
+- i "segnaposto" da usare in `printf` e/o `scanf` per i numeri interi sono i seguenti:
+	- `%d` per i numeri interi in base 10
+	- `%o` per i numeri interi in base 8
+	- `%x` per i numeri interi in base 16
+</script></section><section data-markdown><script type="text/template">
+## Suggerimento 3
+
+- `%i` indica a scanf che può accettare in input numeri interi sia in base 10 che 8 che 16 a seconda di quanto indicato dall'utente (che potrà usare il prefisso 0 per la base 8 e il prefisso 0x per la base 16).
+
+*👉 `%i` Scan an integer as a signed number. Similar to `%d`, but interprets the number as hexadecimal when preceded by `0x` and octal when preceded by `0`. For example, the string `031` would be read as `31` using  `%d`, and `25` using `%i`.* <!-- .element: class="fragment" -->
+</script></section></section><section  data-markdown><script type="text/template">
+## Soluzione 1_2
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#define TITOLO_ES1_2 "Es1.2 - Somma di due numeri (base 10, 8 o 16).\n"
+
+int main(void) {
+
+	int a, b, somma;
+
+	//Es1.2 - Somma di due numeri (base 10, 8 o 16)
+	printf(TITOLO_ES1_2);
+
+	//NB: %i accetta interi in base 10, base 8 e base 16
+	printf("a? ");
+	scanf("%i", &a);
+	
+	printf("b? ");
+	scanf("%i", &b);
+	
+	somma = a + b;
+	
+	printf("Base10: a + b = %d + %d = %d\n", a, b, somma);
+	printf("Base8 : a + b = %o + %o = %o\n", a, b, somma);
+	printf("Base16: a + b = %x + %x = %x\n", a, b, somma);
+	
+	return 0;
+
+}
+
+```</script></section><section  data-markdown><script type="text/template">## Provamo a compilare asteroids su MinGW
+
+(faccio io)
+
+nell'ultima slide ci sono gli esercizi da fare ora, o a casa
+
+🧑‍🏫 la password viene comunicata a voce 🧏‍♂️
+
+</script></section><section  data-markdown><script type="text/template">
+<section data-background-iframe="Laboratorio01-esercizi.pdf" data-background-interactive></section>
+</script></section><section  data-markdown><script type="text/template">
+<section data-background-iframe="ansic-ref.pdf" data-background-interactive></section>
+</script></section><section  data-markdown><script type="text/template">
+<p class="fragment fade-in-then-out">The END</p>
+</script></section><section  data-markdown><script type="text/template">
+
+</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"fade,","slideNumber":"c/t,"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
